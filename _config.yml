@@ -14,7 +14,7 @@ title:            Bill Liu
 tagline:          'The personal website of Bill Liu'
 url:              http://getpoole.com
 paginate:         1
-baseurl: /businessBlog
+baseurl: /businessblog
 encoding: utf-8
 author:
   name:           Bill Liu
