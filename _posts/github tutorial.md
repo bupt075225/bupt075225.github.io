@@ -37,5 +37,6 @@
 
 > git clone *git@github.com:appfuse/appfuse.git*
 
+完善github blog [http://joshualande.com/jekyll-github-pages-poole/](http://joshualande.com/jekyll-github-pages-poole/)
 
-
+启动jekyll 服务：bundle exec jekyll serve

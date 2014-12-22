@@ -1,2 +1,30 @@
+# Dependencies
+markdown:         redcarpet
+redcarpet:
+  extensions: ["tables"]
+
+highlighter:      pygments
+
+# Permalinks
+permalink:        pretty
+relative_permalinks: true
+
+# Setup
+title:            Bill Liu
+tagline:          'The personal website of Bill Liu'
+url:              http://getpoole.com
+paginate:         1
 baseurl: /businessBlog
 encoding: utf-8
+author:
+  name:           Bill Liu
+  url:            https://twitter.com/mdo
+  email:          liuchong.9@gmail.com
+
+# Custom vars
+version:          1.0.0
+github:
+  repo:           https://github.com/bupt075225/businessblog.git
+  
+# This is the list of pages to include in the header of the website.
+pages_list:        {'About':'/businessBlog/about','Archive':'/businessBlog/archive'}
