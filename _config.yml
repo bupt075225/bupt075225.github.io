@@ -27,4 +27,4 @@ github:
   repo:           https://github.com/bupt075225/businessblog.git
   
 # This is the list of pages to include in the header of the website.
-pages_list:        {'About':'/businessBlog/about','Archive':'/businessBlog/archive'}
+pages_list:        {'About':'/businessblog/about','Archive':'/businessblog/archive'}
