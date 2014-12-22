@@ -12,7 +12,7 @@ relative_permalinks: true
 # Setup
 title:            Bill Liu
 tagline:          'The personal website of Bill Liu'
-url:              http://getpoole.com
+url:              http://bupt075225.github.io/businessblog/
 paginate:         1
 baseurl: /businessblog
 encoding: utf-8
