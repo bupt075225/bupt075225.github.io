@@ -54,9 +54,14 @@
 首先从远程仓库下载origin的master分支最新版本,然后比较本地master分支和origin的masteer分支差异.最后进行合并.git fetch这个命令和git pull更安全一些,在merge前我们可以查看更新情况,然后再决定是否合并.
 
 ##在github上搭建一个blog网站
+
 使用github + jekyll + markdown 搭建个人blog站点。在本地撰写blog并在上传到github前预览真实的发布显示效果。另外还可以增加评论和google analytics等其它功能。
 
 在本地启动jekyll 服务的命令：bundle exec jekyll serve
+
+将本地更新提交到github上使用如下命令,gh-pages是一个没有父节点的分支名称，github规定只有在这个分支中的页面，才会生成网页文件。
+
+> git push origin gh-pages
 
 ##参考链接
 
