@@ -1,6 +1,4 @@
-﻿# 使用Jekyll+Github Pages+poole创建博客网站
-
-## Github Pages、Jekyll及poole简介
+﻿## Github Pages、Jekyll及poole简介
 
 Github不仅提供了免费源代码托管空间，[github pages](https://pages.github.com/)为我们提供静态页面的托管，允许大家在github上创建自己的博客网站或主面，而且免费，不限流量，还可以绑定自己的域名。
 
