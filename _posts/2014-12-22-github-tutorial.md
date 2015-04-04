@@ -1,4 +1,4 @@
-##git 常用命令
+﻿##git 常用命令
 
 把当前目录变成Git可以管理的仓库
 
@@ -38,6 +38,20 @@
 从远程仓库克隆到本地仓库，创建一个文件夹用来存放从github克隆下来的源代码，在这个文件夹下执行以下命令：
 
 > git clone *git@github.com:appfuse/appfuse.git*
+
+从远程仓库获取最新的版本到本地仓库有两个命令:git fetch和git pull
+
+> git fetch origin master:temp
+> 
+> git diff temp
+> 
+> git merge temp
+
+还可以使用
+
+> git pull origin master
+
+首先从远程仓库下载origin的master分支最新版本,然后比较本地master分支和origin的masteer分支差异.最后进行合并.git fetch这个命令和git pull更安全一些,在merge前我们可以查看更新情况,然后再决定是否合并.
 
 ##在github上搭建一个blog网站
 使用github + jekyll + markdown 搭建个人blog站点。在本地撰写blog并在上传到github前预览真实的发布显示效果。另外还可以增加评论和google analytics等其它功能。
