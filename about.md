@@ -1,4 +1,4 @@
----
+﻿---
 layout: page
 title: About
 ---
@@ -6,6 +6,14 @@ title: About
 <p class="message">
   Hey there! This page is included as an example. Feel free to customize it for your own use upon downloading. Carry on!
 </p>
+
+My name is Liu Chong(刘翀). You can call me Bill. I was born in 1980s.
+
+I am an IT developer focusing on web technology, SAN/NAS storage.
+
+In spare time, I like reading book, watching movie and taking a leisurely walk outdoors.
+
+Have questions or suggestions? Feel free to contact me liuchong.8@163.com
 
 In the novel, *The Strange Case of Dr. Jekyll and Mr. Hyde*, Mr. Poole is Dr. Jekyll's virtuous and loyal butler. Similarly, Poole is an upstanding and effective butler that helps you build Jekyll themes. It's made by [@mdo](https://twitter.com/mdo).
 
