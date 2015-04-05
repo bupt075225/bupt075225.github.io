@@ -53,6 +53,18 @@
 
 首先从远程仓库下载origin的master分支最新版本,然后比较本地master分支和origin的masteer分支差异.最后进行合并.git fetch这个命令和git pull更安全一些,在merge前我们可以查看更新情况,然后再决定是否合并.
 
+版本回退，如果暂存区的修改通过commit命令提交到了仓库，现在又想回退到之前某个已commit的版本，应该使用什么命令呢？
+
+首先用git log命令查看提交历史记录，确定要回退到哪个版本。
+
+> git log
+
+在git中，HEAD表示当前版本，上一个版本是HEAD^，上上一个版本是HEAD^^,继续下去就是从三到万了，往回100个版本可写为HEAD~100。使用git reset命令进行版本回退，通过HEAD指定回退到哪个版本，如下所示回退三个版本：
+
+> git reset --hard HEAD~3
+
+上面是回退到过去的某个版本，还可以再回到未来的某个版本，就像在古今来回穿越。穿越回现代就得知道现在对应的哪个commit id，仍然使用上面这个命令，只是将HEAD换成commit id。
+
 ##在github上搭建一个blog网站
 
 使用github + jekyll + markdown 搭建个人blog站点。在本地撰写blog并在上传到github前预览真实的发布显示效果。另外还可以增加评论和google analytics等其它功能。
