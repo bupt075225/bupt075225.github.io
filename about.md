@@ -1,7 +1,6 @@
 ﻿---
 layout: page
 title: About
-comments: False
 ---
 
 My name is Liu Chong(刘翀). You can call me Bill. I was born in 1980s.
