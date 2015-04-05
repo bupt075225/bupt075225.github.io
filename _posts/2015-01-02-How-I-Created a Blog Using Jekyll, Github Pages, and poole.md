@@ -2,7 +2,7 @@
 
 Github不仅提供了免费源代码托管空间，[github pages](https://pages.github.com/)为我们提供静态页面的托管，允许大家在github上创建自己的博客网站或主面，而且免费，不限流量，还可以绑定自己的域名。
 
-[Jekyll](https://github.com/jekyll/jekyll)是一个静态页面模板转换引擎，只要上传符合jekyll规范的文件，github会用这种模板引擎为你转化成静态页面和网站。Jekyll是github上的一个开源项目,这里就不详细介绍。
+[Jekyll](https://github.com/jekyll/jekyll)是一个静态页面模板转换引擎，使用Liquid模板语言，只要上传符合jekyll规范的文件，github会用这种模板引擎为你转化成静态页面和网站。Jekyll是github上的一个开源项目,这里就不详细介绍。
 
 [Poole](https://github.com/poole/poole)是github上一个开源项目，它提供Jekyll站点模板，风格简洁，可查看他的一个[DEMO](demo.getpoole.com)。
 
@@ -117,7 +117,7 @@ index.html、_layouts和_includes文件夹下存放了博客网站的前端页�
 
 ## 发表文章到博客网站
 
-网站建好后，使用markdown编辑器书写文章并保存到_posts文件夹下，注意文件命名使用日期加文章标题的方式，单词间用-间隔开，如下所示：
+网站建好后，使用markdown编辑器书写文章并保存到_posts文件夹下，注意文件名必须为"年-月-日-文章标题.后缀名"的格式，如下所示：
 
 ![](http://i.imgur.com/hR96StY.png)
 
