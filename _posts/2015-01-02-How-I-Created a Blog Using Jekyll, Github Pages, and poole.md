@@ -107,6 +107,13 @@ index.html、_layouts和_includes文件夹下存放了博客网站的前端页�
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
     {% endif %}
 
+`{% if page.comments %}` 用来设置页面是否包含评论功能。在index.html头部增加一行“comments: True”，就可以在所有发表的文章页面包含评论功能，而在about或archive页面不开启评论功能。
+
+    ---
+    layout: default
+    title: Home
+    comments: True
+    ---
 
 ## 发表文章到博客网站
 
