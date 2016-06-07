@@ -79,9 +79,7 @@ index.html、_layouts和_includes文件夹下存放了博客网站的前端页�
     
     </script>
 
-将这份代码放在 _includes/google_analytics.html文件中，最后在_layouts/default.html中使用如下命令包含该文件：
-
-    {% include google_analytics.html %}
+将这份代码放在 _includes/google_analytics.html文件中，最后在_layouts/default.html中使用如下命令包含该文件：{% include google_analytics.html %}
 
 第四步，为网站增加评论系统。这里我使用的是[Disqus](https://disqus.com/),他是一个第三方评论托管系统。到官网注册一个账号后，在设置选项中有一项是“Add Disqus To Site”是用来设置你将到把评论模块加到哪个网站，设置完成后，点击“Install”，这时根据网站使用的那种建站平台来进行安装，我选的是“Universal Code”。
 

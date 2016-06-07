@@ -2,6 +2,7 @@
 
 ![](http://i.imgur.com/JSFJXDI.png)
 
+此外，IOS系统中也有一个类似的软件名叫[hone](https://hone.tools/)
 ## 测试App
 
 可以使用Android设备对开发的APP进行测试，也可以通过模拟器进行测试。要使用模拟器需要在本地电脑中额外[安装App Inventor](http://appinventor.mit.edu/explore/ai2/setup-emulator.html)软件，它包含了模拟器软件和与浏览器通信的软件aiStarter；如果使用Android设备进行测试则需要安装设备对应的驱动。
@@ -19,3 +20,4 @@ App制作完成后，可导出.apk格式的app安装到Android设备；也可导
 1. [http://appinventor.mit.edu/explore/ai2/beginner-videos.html](http://appinventor.mit.edu/explore/ai2/beginner-videos.html "APP inventor的视频入门教程")
 2. [http://appinventor.mit.edu/explore/](http://appinventor.mit.edu/explore/)
 3. [http://appinventor.mit.edu/explore/get-started?](http://appinventor.mit.edu/explore/get-started? "App Inventor入门最佳实践")
+4. [https://hone.tools/](https://hone.tools/ "IOS系统上与App inventor类似的软件")
