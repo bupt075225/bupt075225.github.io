@@ -26,4 +26,4 @@ github:
   repo:           https://github.com/bupt075225/bupt075225.github.io.git
   
 # This is the list of pages to include in the header of the website.
-pages_list:        {'About':'/businessblog/about','Archive':'/businessblog/archive'}
+pages_list:        {'About':' http://bupt075225.github.io/about','Archive':' http://bupt075225.github.io/archive'}
