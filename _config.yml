@@ -12,10 +12,10 @@ relative_permalinks: true
 # Setup
 title:            Bill Liu
 tagline:          'The personal website of Bill Liu'
-url:              http://bupt075225.github.io/businessblog/
+url:              http://bupt075225.github.io
 paginate:         1
-baseurl: /businessblog
-encoding: utf-8
+baseurl:          http://bupt075225.github.io
+encoding:         utf-8
 author:
   name:           Bill Liu
   url:            https://twitter.com/bupt075225
@@ -24,7 +24,7 @@ author:
 # Custom vars
 version:          1.0.0
 github:
-  repo:           https://github.com/bupt075225/businessblog.git
+  repo:           https://github.com/bupt075225/bupt075225.github.io.git
   
 # This is the list of pages to include in the header of the website.
 pages_list:        {'About':'/businessblog/about','Archive':'/businessblog/archive'}
