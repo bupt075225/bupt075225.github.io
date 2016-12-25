@@ -1,9 +1,4 @@
-﻿---
-layout: page
-title: About
----
-
-I am an software developer focusing on web technology, SAN/NAS storage,using C,Python coding.
+﻿I am an software developer focusing on web technology, SAN/NAS storage,using C,Python coding.
 
 In spare time, I like reading book, watching movie and taking a leisurely walk outdoors.
 
