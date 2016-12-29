@@ -36,16 +36,16 @@ index.html、_layouts和_includes文件夹下存放了博客网站的前端页�
 
 创建archive.md文件，用来显示文章动态列表：
 
-    ---
-    layout: page
-    title: Archive
-    ---
+>---
+>layout: page
+>title: Archive
+>---
     
-    ## Blog Posts
+>## Blog Posts
     
-    {% for post in site.posts %}
-      * {{ post.date | date_to_string }} &raquo; [ {{ post.title }} ]({{ post.url }})
-    {% endfor %}
+>{% for post in site.posts %}
+>* {{ post.date | date_to_string }} &raquo; [ {{ post.title }} ]>>({{ post.url }})
+>{% endfor %}
 
 文件中使用了Liquid语法。
 
