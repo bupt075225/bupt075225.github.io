@@ -18,7 +18,7 @@
 <noscript>Please enable JavaScript to view the comment form powered by <a href="https://commentit.io/">Comm(ent|it)</a></noscript>
 
 {% if page.comments %}
-  {% assign sorted_comments = (site.data.comments[page.id] | sort: 'date') %}
+  {% assign sorted_comments = (page.comments | sort: 'date') %}
   {% for c in sorted_comments %}
   <div class="media">
     <div class="media-left">
