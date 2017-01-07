@@ -1,8 +1,18 @@
 ﻿##git 常用命令
 
+1.**初始化git仓库**
+
 把当前目录变成Git可以管理的仓库
 
 > git init
+
+通过SSH或HTTPS从远程git服务器克隆一个远程仓库：
+
+> git clone username@hostname/IP:/path/xxx.git
+> 
+> git clone https://xxx.com
+
+2.**提交更新**
 
 把文件名为file的文件从工作区添加到仓库暂存区(stage/index)
 
@@ -16,6 +26,21 @@
 
 > git status
 
+将本地仓库中的更新提交到远程仓库：
+
+> git push 远程git服务器名 本地分支名:远程分支名
+
+这条命令表示的意思是，将源地直为本地分支的更新推送到远程git服务器上，目的地址为远程分支。如果本地分支和远程分支建立了跟踪关系，可以省略远程分支名，一个示例：
+
+> git push origin master:master
+
+第一次把本地仓库的所有内容推送到远程仓库，远程仓库所在的服务器在本地的别名是origin，这是git默认的叫法，也可以修改为其它的，master是远程仓库的主分支。-u选项设置本地分支去跟踪远程对应的分支，设置好跟踪的分支后，就可以使用git push命令省去指定推送分支的参数。
+
+> git push -u origin master
+
+以后就可用下面的命令把本地master分支的最新修改推送到远程仓库github
+
+> git push origin master
 
 查看工作区和仓库里最新版本的差异
 
@@ -24,23 +49,16 @@
 将本地仓库与远程仓库github关联起来（前提是已在github上创建了与本地仓库同步更新的远程仓库），这样就可以把本地仓库的内容推送到github，如下示例为通过SSH地址进行关联。
 
 > git remote add origin *git@github.com:bupt075225/businessblog.git*
-
-第一次把本地仓库的所有内容推送到远程仓库，远程仓库的主分支在本地的别名是origin，这是git默认的叫法，也可以修改为其它的，master是远程仓库的主分支。-u选项设置本地分支去跟踪远程对应的分支，设置好跟踪的分支后，就可以使用git push命令省去指定推送分支的参数。
-
-> git push -u origin master
-
-以后就可用下面的命令把本地master分支的最新修改推送到远程仓库github
-
-
-> git push origin master
-
  
-从远程仓库克隆到本地仓库，创建一个文件夹用来存放从github克隆下来的源代码，在这个文件夹下执行以下命令：
-
-> git clone *git@github.com:appfuse/appfuse.git*
+3.**拉取更新**
 
 从远程仓库获取最新的版本到本地仓库有两个命令:git fetch和git pull
 
+> git fetch 远程git服务器 远程分支:本地分支
+
+这条命令的意思是，从远程git服务器上抓取本地没有的数据，源地址是远程分支，目的地址是本地分支。
+
+一个示例：
 > git fetch origin master:temp
 > 
 > git diff temp
@@ -51,11 +69,11 @@
 
 > git pull origin master
 
-首先从远程仓库下载origin的master分支最新版本,然后比较本地master分支和origin的master分支差异.最后进行合并.git fetch这个命令和git pull更安全一些,在merge前我们可以查看更新情况,然后再决定是否合并.
+首先从远程仓库下载origin的master分支最新版本,然后比较本地master分支和origin的master分支差异.最后进行合并.git fetch这个命令比git pull更安全一些,在merge前我们可以查看更新情况,然后再决定是否合并.
 
 ## git进阶命令
 
-1.版本回退
+1.**版本回退**
 
 如果暂存区的修改通过commit命令提交到了仓库，现在又想回退到之前某个已commit的版本，应该使用什么命令呢？
 
@@ -69,7 +87,7 @@
 
 上面是回退到过去的某个版本，还可以再回到未来的某个版本，就像在古今来回穿越。穿越回现代就得知道现在对应的哪个commit id，仍然使用上面这个命令，只是将HEAD换成commit id。
 
-2.使用分支
+2.**使用分支**
 
 通过clone命令创建主分支后，在主分支文件根目录下执行下面的命令创建分支：
 
@@ -87,9 +105,15 @@ git checkout命令加上-b选项表示创建并切换(相当于git branch new-br
 
 协作开发时,新加入的同事要基于上述新建分支开发,就必须将分支拉到本地,使用如下命令拉取分支到本地:
 
+> git fetch origin
+> 
 > git checkout -b new-branch-name origin/new-branch-name
 
-这个命令可能会报如下的错误:
+首先使用git fetch命令从远程git服务器抓取本地没有的数据，它不会修改工作区域中的内容，只会获取数据让你自己合并。
+
+然后git checkout命令在远程分支origin/new-branch-name基础上创建新的本地分支并切换到新建分支上。
+
+如果新建分支前不抓取更新，git checkout命令可能会报如下的错误:
 
 ![](http://i.imgur.com/pQbw6mA.png)
 
@@ -101,9 +125,13 @@ git checkout命令加上-b选项表示创建并切换(相当于git branch new-br
 
 > git branch
 
-这个命令会列出所有分支，当前分支前会标一个*号。
+上面这个命令会列出所有分支，当前分支前会标一个*号，如下图所示：
 
 ![](http://i.imgur.com/C9Y7dPF.png)
+
+> git branch -vv
+
+-vv参数用于显示更详细的分支信息，包括分支与它跟踪的远程分支对应关系。
 
 > git branch -d <branch-name>
 
@@ -119,20 +147,10 @@ git checkout命令加上-b选项表示创建并切换(相当于git branch new-br
 
 ![](http://i.imgur.com/5G7VTZo.png)
 
-##在github上搭建一个blog网站
 
-使用github + jekyll + markdown 搭建个人blog站点。在本地撰写blog并在上传到github前预览真实的发布显示效果。另外还可以增加评论和google analytics等其它功能。
-
-在本地启动jekyll 服务的命令：bundle exec jekyll serve
-
-将本地更新提交到github上使用如下命令,gh-pages是一个没有父节点的分支名称，github规定只有在这个分支中的页面，才会生成网页文件。
-
-> git push origin gh-pages
 
 ##参考链接
 
-1. [http://www.pchou.info/web-build/2014/07/04/build-github-blog-page-08.html](http://www.pchou.info/web-build/2014/07/04/build-github-blog-page-08.html "blog on github tutorial") 在windows环境中使用github + jekyll在github上搭建一个blog以及发布blog的本地测试环境
-2. [http://joshualande.com/jekyll-github-pages-poole/](http://joshualande.com/jekyll-github-pages-poole/)  基于一个简洁的jekyll模板完善github blog
 3. [http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)  一个介绍git的学习教程
 
 
