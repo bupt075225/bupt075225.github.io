@@ -48,7 +48,7 @@ index.html、_layouts和_includes文件夹下存放了博客网站的前端页�
     ## Blog Posts
     
     {% for post in site.posts %}
-    * {{ post.date | date_to_string }} &raquo; [ {{ post.title }} ]>>({{ post.url }})
+      *{{ post.date | date_to_string }} &raquo; [ {{ post.title }} ]>>({{ post.url }})
     {% endfor %}
 
 文件中使用了Liquid语法。
