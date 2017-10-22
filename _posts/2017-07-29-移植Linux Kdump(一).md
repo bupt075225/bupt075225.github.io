@@ -20,9 +20,9 @@ Kdump是Linux系统的一个功能，当内核崩溃时它会生成core dump文�
 
 步骤1 —— 配置内核编译选项
 
-系统内核与捕捉内核可以是同一个内核，也可以是分别编译的两个内核，最好是使用同一个内核。
+系统内核与捕捉内核可以是同一个内核，也可以是分别编译的两个内核。
 
-执行`make menuconfig`命令，配置以下这些内核选项：
+在内核源码顶层目录下执行`make menuconfig`命令，配置以下这些内核选项：
 
 Processor type and features -> kexec system call
 
@@ -34,7 +34,9 @@ Processor type and features -> Physical address where the kernel is loaded
 
 上面这个选项为捕捉内核设置一个加载起始地址，到底应该从什么地址开始？没有一个固定值，如果设置不正确，加载内核时会报错提示加载地址非法，不能访问。通常0x1000000/16M或0x2000000/32M是可以的。可以使用`cat /proc/iomem`命令查看当前系统内核占用的内存之后那片预留内存在什么地址范围，系统内核通常会使用这片预留内存来加载捕捉内核。
 
-在系统Grub的内核启动选项中加上“crashkernel=X@y”这个选项，其中X表示系统内核需要预留的内存大小，用来加载捕捉内核，Y表示预留内存的起始物理地址，就是上面内核选项设置的加载起始地址。例如"crashkernel=128M@32M"表示在32M的起始地址之后预留128M内存。
+在bootloader(Grub)的内核启动选项中加上“crashkernel=X@y”这个选项，其中X表示系统内核需要预留的内存大小，用来加载捕捉内核，Y表示预留内存的起始物理地址，就是上面内核选项设置的物理地址。例如"crashkernel=128M@32M"表示在32M的起始地址之后预留128M内存。
+
+>经测试，内核启动选项crashkernel只配置预留内存大小，不配置起始地址时，上面这个物理地址配置项与实际捕捉内核加载地址不一致也可以。
 
 Kernel hacking -> Compile the kernel with debug info
 
@@ -48,7 +50,7 @@ Processor type and features -> 启用高端内存的支持
 
 Processor type and features中支持SMP的选项如果被打开，在kexec命令加载捕捉内核时指定“maxcpus=1”或“nr_cpus=1”选项，捕捉内核就不关闭多CPU支持，如果想要提高dump工具makedumpfile的性能，也可以打开多CPU支持，有兴趣或需要可以进一步研究支持多CPU的方法。
 
-此外，建议将选项打开，可以使用下面的命令触发内核崩溃：
+此外，建议将选项`CONFIG_MAGIC_SYSRQ`打开，可以使用下面的命令触发内核崩溃：
 
     [root@localhost ~]# echo c > /proc/sysrq-trigger
 
@@ -73,9 +75,60 @@ Processor type and features中支持SMP的选项如果被打开，在kexec命令
 
 在系统挂载根文件系统成功后，在/etc/inittab文件中找一个加载点来启动Kdump服务。服务启动脚本的主要逻辑是：判断如果存在`/proc/vmcore`，则转储core dump文件到dump目录，否则就使用kexec命令来加载捕捉内核。下面是一个Kdump服务启动脚本的实现：
 
+    #!/bin/bash
+
+    KDUMP_BOOT_DIR="/boot"
+    KDUMP_INITRD="rootfs_x64-svn.gz"
+    KDUMP_KERNEL="bzImage_x64"
+
+
+    function save_core()
+    {
+        coredir="${KDUMP_PATH}/127.0.0.1-`date +"%Y-%m-%d-%H:%M"`"
+    
+        mkdir -p $coredir
+        save_kernel_logs "${coredir}"
+
+        if [ ! -f /sbin/vmcore-dmesg ];then
+            echo "Skipping saving vmcore-dmesg.txt. File /sbin/vmcore-dmesg is not present"
+            return;
+        fi
+    
+        echo "kdump: saving vmcore-dmesg.txt to $coredir"
+        /sbin/vmcore-dmesg /proc/vmcore > $coredir/vmcore-dmesg-incomplete.txt
+        if [ $? == 0 ]; then
+            mv $_path/vmcore-dmesg-incomplete.txt $coredir/vmcore-dmesg.txt
+            echo "kdump: saved vmcore-dmesg.txt to $_path"
+        else
+            echo "kdump: failed to save vmcore-dmesg.txt to $coredir"
+        fi
+    }
+
+    if [ -s /proc/vmcore ];then
+        echo "Save core dump file"
+        save_core
+        reboot
+    else
+        # Loading kdump kernel
+        echo "Loading kdump kernel"
+        kexec -p '--command-line=rw root=/dev/ram0 irqpoll maxcpus=1 reset_devices cgroup_disable=memory mce=off' --initrd=$KDUMP_BOOT_DIR/$KDUMP_INITRD $KDUMP_BOOT_DIR/$KDUMP_KERNEL
+    fi
+
 ### 测试Kdump
 
 触发内核崩溃，等系统内核再次启动后，查看dump目录下是否保存了上次的core dump相关文件。
+
+### FQA
+
+1.crashkernel选项值取多少才合适？
+
+crashkernel选项值中的预留内存大小通常是64M、128M、256M，起始地址可以不设置，由内核自动选择一个可用的起始地址，例如：crashkernel=128M，表示预留128M内存，超始地址由内核确定。
+
+设置crashkernel后，重启系统，使用`cat /proc/iomem`可以确定预留内存是是否成功，起始物理地址和大小，如下图所示：
+
+![](http://i.imgur.com/w7CE0dI.jpg)
+
+预留内存设置太少，会导致启动捕捉内核时OOM(Out of Memory);还可能出现使用`echo c > /proc/sysrq-trigger`触发内核崩溃后系统被一直挂住，捕捉内核无法启动。
 
 ### 后记
 
