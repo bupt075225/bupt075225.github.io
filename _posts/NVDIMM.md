@@ -16,13 +16,53 @@ Region
 
 主板上的DIMM插槽称为socket，在Linux系统中，一个或多个socket上的NVDIMM抽象为一个region，它有PMEM和BLK两种类型，类型决定了以什么样的方式访问持久化存储。
 
+\# ndctl list --dimms
+[
+  {
+    "dev":"nmem1",
+    "id":"8089-a2-1904-00003054",
+    "handle":272,
+    "phys_id":69,
+    "flag_failed_flush":true,
+    "flag_smart_event":ture
+  },
+  {
+    "dev":"nmem0",
+    "id":"8089-a2-1904-0000310e",
+    "handle":256,
+    "phys_id":66,
+    "flag_failed_flush":true,
+    "flag_smart_event":ture
+  }
+]
 
+\# ndctl list --regions
+[
+  {
+    "dev":"region0",
+    "size":270582939648,
+    "available_size":0,
+    "type":"pmem",
+    "iset_id":210280806750034028,
+    "persistence_domain":"unknown"
+  }
+]
 
 Namespace
 
 Region划分为一个或多个namespaces，在/dev目录下有/dev/pmem设备与namespace对应，只有划分了namespace后，软件才能访问到持久化内存。Namespace继承region的类型属性，但它还有mode属性，属于同一个region的不同namespace有相同的类型属性，但可以有不同的mode属性。Mode定义namespace的软件特性，包括如下这些：raw, sector, memory, dax。
 
-
+\# ndctl list --namespaces
+[
+  {
+    "dev":"namespace0.0",
+    "mode":"fsdax",
+    "map":"dev",
+    "size":266352984064,
+    "uuid":"1a0a70bd-d397-4261-890b-a37dd9290000",
+    "blockdev":"pmem0"
+  }
+]
 
 BTT(Block Translation Table)
 
