@@ -1,0 +1,3 @@
+Python import的实现分析
+
+Python 2.7内置库datetime和time在导入strptime模块时，不是线程安全，会抛出Attribute Error异常。
